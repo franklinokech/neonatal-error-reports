@@ -13,8 +13,9 @@ services:
       # Path the script reads via Sys.getenv("PROJECT_ROOT")
       PROJECT_ROOT: /app
 
-      # REDCap API endpoint reachable from inside the container
-      REDCAP_API_URL: http://host.docker.internal/redcap/api/
+      # REDCap API endpoint and token (both come from .env)
+      REDCAP_API_URL:   ${REDCAP_API_URL}
+      REDCAP_API_TOKEN: ${REDCAP_API_TOKEN}
 
       # Limit forked workers inside the container
       R_WORKERS: "2"
@@ -27,9 +28,6 @@ services:
 
       # *** Critical: base R needs to see the named-volume library ***
       R_LIBS: /renv-library
-
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
     volumes:
       # ---- HOT RELOAD: source code from host ----
@@ -58,7 +56,6 @@ services:
           cpus: "2"
           memory: 4g
 
-    # Watch-driven reruns. Requires Docker Compose v2.22+.
     develop:
       watch:
         - action: sync+restart
