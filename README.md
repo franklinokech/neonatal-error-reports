@@ -90,3 +90,8 @@ chmod +x ~/Desktop/neonatal-report.desktop
 
 # GNOME requires this before desktop icons become executable:
 gio set ~/Desktop/neonatal-report.desktop metadata::trusted true
+
+# resolving permission issues
+sudo rm -f tmp/NeonatalErrorReport.csv
+sudo chown -R "$USER:$USER" tmp/
+sudo chown -R "$USER:$USER" dats.csv/
