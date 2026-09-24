@@ -83,3 +83,10 @@ chmod +x ~/.local/share/applications/neonatal-report.desktop
 
 # Refresh the desktop database
 update-desktop-database ~/.local/share/applications 2>/dev/null || true
+
+# or add it to desktop
+cp neonatal-report.desktop ~/Desktop/
+chmod +x ~/Desktop/neonatal-report.desktop
+
+# GNOME requires this before desktop icons become executable:
+gio set ~/Desktop/neonatal-report.desktop metadata::trusted true
