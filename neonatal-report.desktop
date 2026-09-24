@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Neonatal Error Report
+GenericName=REDCap Neonatal Data Validator
+Comment=Run the neonatal data-quality validation and open the report
+Exec=/home/bob/hsuApps/docker/error-scripts/neonatal-error-reports/run-report.sh
+Path=/home/bob/hsuApps/docker/error-scripts/neonatal-error-reports
+Icon=utilities-terminal
+Terminal=true
+Categories=Utility;Office;
+StartupNotify=true

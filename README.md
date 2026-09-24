@@ -69,6 +69,17 @@ R_WORKERS=2
 # ---- Build arg (needed only if RedcapData is private) ----
 GITHUB_PAT=<paste a GitHub personal access token>
 
+# make the shell script exec
+chmod +x run-report.sh
 
 # RUN
 sh run-report.sh
+
+# UPDATE the .desktop file paths
+
+mkdir -p ~/.local/share/applications
+cp neonatal-report.desktop ~/.local/share/applications/
+chmod +x ~/.local/share/applications/neonatal-report.desktop
+
+# Refresh the desktop database
+update-desktop-database ~/.local/share/applications 2>/dev/null || true
