@@ -10,40 +10,24 @@ services:
     working_dir: /app
 
     environment:
-      # ---- Path the script reads via Sys.getenv("PROJECT_ROOT") ----
+      # Path the script reads via Sys.getenv("PROJECT_ROOT")
       PROJECT_ROOT: /app
 
-      # ---- REDCap ----
-      REDCAP_API_URL:     ${REDCAP_API_URL}
-      REDCAP_API_TOKEN:   ${REDCAP_API_TOKEN}
-      ID_VAR:             ${ID_VAR}
-      DATE_VAR:           ${DATE_VAR}
-      HOSP_VAR:           ${HOSP_VAR}
-      SURROGATE_ID_VAR:   ${SURROGATE_ID_VAR}
+      # REDCap API endpoint reachable from inside the container
+      REDCAP_API_URL: http://host.docker.internal/redcap/api/
 
-      # ---- Report scope ----
-      REPORT_INTERVAL:    ${REPORT_INTERVAL}
-      HOSP_TO_VALIDATE:   ${HOSP_TO_VALIDATE}
+      # Limit forked workers inside the container
+      R_WORKERS: "2"
 
-      # ---- Fetch behaviour ----
-      LOCAL:              ${LOCAL}
-      CHUNKED:            ${CHUNKED}
-      CHUNK_SIZE:         ${CHUNK_SIZE}
-
-      # ---- Runtime ----
-      R_WORKERS:          ${R_WORKERS:-2}
-
-      # ---- renv paths ----
+      # renv paths — point at the named volumes
       RENV_CONFIG_CACHE_ENABLED: "TRUE"
-      RENV_PATHS_CACHE:          /renv-cache
-      RENV_PATHS_LIBRARY:        /renv-library
+      RENV_PATHS_CACHE: /renv-cache
+      RENV_PATHS_LIBRARY: /renv-library
       RENV_CONFIG_SANDBOX_ENABLED: "FALSE"
 
-      # ---- Base R needs to see the named-volume library ----
+      # *** Critical: base R needs to see the named-volume library ***
       R_LIBS: /renv-library
 
-    # Only needed if REDCAP_API_URL uses host.docker.internal.
-    # Safe to leave in; harmless when the URL is a public hostname.
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -57,7 +41,6 @@ services:
       - ./rec_limits.R:/app/rec_limits.R
       - ./time validation.R:/app/time validation.R
       - ./TestErrors.R:/app/TestErrors.R
-      - ./dats.csv:/app/dats.csv
       - ./metadats.csv:/app/metadats.csv
       - ./upd.csv:/app/upd.csv
       - ./renv.lock:/app/renv.lock:ro
@@ -66,8 +49,8 @@ services:
       - renv-library:/renv-library
       - renv-cache:/renv-cache
 
-      # ---- OUTPUT ----
-      - reports:/app/tmp
+      # ---- OUTPUT: reports written to ./tmp/ on the host ----
+      - ./tmp:/app/tmp
 
     deploy:
       resources:
@@ -93,4 +76,3 @@ services:
 volumes:
   renv-library:
   renv-cache:
-  reports:

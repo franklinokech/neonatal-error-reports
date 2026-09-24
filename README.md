@@ -70,3 +70,5 @@ R_WORKERS=2
 GITHUB_PAT=<paste a GitHub personal access token>
 
 
+# RUN
+sh run-report.sh
