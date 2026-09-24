@@ -1,0 +1,11 @@
+renv/library/
+renv/staging/
+renv/cache/
+renv/
+tmp/
+*.R~
+.Rhistory
+.RData
+.Rproj.user/
+.env
+.git/

@@ -1,0 +1,96 @@
+services:
+  neonatal-reports:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GITHUB_PAT: ${GITHUB_PAT}
+    image: neonatal-reports:dev
+    container_name: neonatal-reports
+    working_dir: /app
+
+    environment:
+      # ---- Path the script reads via Sys.getenv("PROJECT_ROOT") ----
+      PROJECT_ROOT: /app
+
+      # ---- REDCap ----
+      REDCAP_API_URL:     ${REDCAP_API_URL}
+      REDCAP_API_TOKEN:   ${REDCAP_API_TOKEN}
+      ID_VAR:             ${ID_VAR}
+      DATE_VAR:           ${DATE_VAR}
+      HOSP_VAR:           ${HOSP_VAR}
+      SURROGATE_ID_VAR:   ${SURROGATE_ID_VAR}
+
+      # ---- Report scope ----
+      REPORT_INTERVAL:    ${REPORT_INTERVAL}
+      HOSP_TO_VALIDATE:   ${HOSP_TO_VALIDATE}
+
+      # ---- Fetch behaviour ----
+      LOCAL:              ${LOCAL}
+      CHUNKED:            ${CHUNKED}
+      CHUNK_SIZE:         ${CHUNK_SIZE}
+
+      # ---- Runtime ----
+      R_WORKERS:          ${R_WORKERS:-2}
+
+      # ---- renv paths ----
+      RENV_CONFIG_CACHE_ENABLED: "TRUE"
+      RENV_PATHS_CACHE:          /renv-cache
+      RENV_PATHS_LIBRARY:        /renv-library
+      RENV_CONFIG_SANDBOX_ENABLED: "FALSE"
+
+      # ---- Base R needs to see the named-volume library ----
+      R_LIBS: /renv-library
+
+    # Only needed if REDCAP_API_URL uses host.docker.internal.
+    # Safe to leave in; harmless when the URL is a public hostname.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    volumes:
+      # ---- HOT RELOAD: source code from host ----
+      - ./00-main.R:/app/00-main.R
+      - ./custom-neonatal.R:/app/custom-neonatal.R
+      - ./custom-neonatal-update.R:/app/custom-neonatal-update.R
+      - ./custom.R:/app/custom.R
+      - ./exclude.R:/app/exclude.R
+      - ./rec_limits.R:/app/rec_limits.R
+      - ./time validation.R:/app/time validation.R
+      - ./TestErrors.R:/app/TestErrors.R
+      - ./dats.csv:/app/dats.csv
+      - ./metadats.csv:/app/metadats.csv
+      - ./upd.csv:/app/upd.csv
+      - ./renv.lock:/app/renv.lock:ro
+
+      # ---- PERSISTENT: installed R packages and cache ----
+      - renv-library:/renv-library
+      - renv-cache:/renv-cache
+
+      # ---- OUTPUT ----
+      - reports:/app/tmp
+
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 4g
+
+    # Watch-driven reruns. Requires Docker Compose v2.22+.
+    develop:
+      watch:
+        - action: sync+restart
+          path: .
+          target: /app
+          ignore:
+            - renv/
+            - .git/
+            - tmp/
+        - action: rebuild
+          path: renv.lock
+
+    command: ["Rscript", "00-main.R"]
+
+volumes:
+  renv-library:
+  renv-cache:
+  reports:

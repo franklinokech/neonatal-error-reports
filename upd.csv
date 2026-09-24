@@ -1,0 +1,13 @@
+update,site,date,new_vars,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+03-May,71,2018-05-03,other_discharge_diag,other_discharge_diag_1,other_discharge_diag_2,other_discharge_diag_3,other_discharge_diag_4,other_discharge_diag_5,other_discharge_diag_unlisted,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Jun-16,71, 2018-06-11, weight_doc, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8,weight_9,weight_10,weight_11,weight_12,weight_13,weight_14, weight_15, weight_16, weight_17, weight_18, weight_19,weight_20,date_1, date_2, date_3, date_4, date_5, date_6, date_7, date_8, date_9,date_10,date_11,date_12,date_13,date_14, date_15, date_16, date_17, date_18, date_19,date_20
+Oct-18,71,2018-10-08,birth_wt_units, discharge_wt_units,post_weight_date1,post_weight_date2,post_weight_date3,post_weight_date4,post_weight_date5,post_weight_date6,postdischarge_weight_1,postdischarge_weight_2,postdischarge_weight_3,postdischarge_weight_4,postdischarge_weight_5,postdischarge_weight_6,,,,,,,,,,,,,,,,,,,,,,,,,,,
+12-oct,71,2018-10-12,birth_wt_units,discharge_wt_units,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Feb-19,71, 2019-02-26, cefta_date,cefta_date_stopped,amikacin_date, date_amikacin_stopped,wt_now,wt_now_units,tone,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Mar-19,71, 2019-03-01, cpap_end_time,cpap_start_time,t_adm,t_birth,t_discharge,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Aug-19, 71, 2019-08-08, last_menstrual_period;respiratory_rate_rr_per_mi;rapture_of_membrane; t_seen
+Feb-20, 71, 2020-02-12, neo_std_monit_chart_pre;neo_intnsv_monit_chart_pre;post_discharge_weight_other;post_weight_unit1;post_weight_unit2;post_weight_unit3;post_weight_unit4;post_weight_unit5;post_weight_unit6
+7-Jul,71, 2020-07-31,crp_done;other_maternal_cond;referral_info_available;in_gis_avail_ke;in_gis_doc_ke;in_gis_subc;in_gis_ward;in_gis_loc;in_gis_subloc;in_gis_school;in_gis_hosp;in_gis_add;weight_1_units;weight_2_units;weight_3_units;weight_4_units;weight_5_units;weight_6_units;weight_7_units;weight_8_units;weight_9_units;weight_10_units;weight_11_units;weight_12_units;weight_13_units;weight_14_units;weight_15_units;weight_16_units;weight_17_units;weight_18_units;weight_19_units;weight_20_units;transfer_form;mother_fever;mother_tbtreat;mother_diabetes;mother_htn;mother_preeclampsia;mother_eclampsia;in_othfac_nam;in_bil_hi;phenobarb;aminophylline;caffeine_citrate;oxygen_admin;date_feeds_first_presc;in_chloro;in_vitk; bilirubin_hi_unit
+1-Oct,71, 2020-10-04,type_feed_presc_next_day;total_fluids_next_day;total_feeds_presc_next_day;is_other_maternal_cond;mother_anten_corti;mother_alive;baby_resusc_at_birth
+1-Mar,71, 2021-03-10,baby_breastfeeding;baby_breastfeeding_disch
+1-Dec,71, 2021-12-14,total_input;d1_present
